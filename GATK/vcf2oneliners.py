@@ -106,12 +106,52 @@ def callSNPs(current_base, numb_of_seqs):
         
     return blanks
 
+def callSNPs(current_base, numb_of_seqs):
+    """Call the SNPs. Duh!"""
+    
+    
+    def process_snp_call(snp_call, ref, alt):
+        """Process VCF genotype fields.
+            The current version is very basic and 
+            doesn't directly take into account the
+            quality of the call."""
+        
+        called_base = ""
+        snp_call = snp_call.split(":")
+        
+        # process blanks
+        if snp_call[0] == "./.":
+            called_base = "-"
+        
+        # process mutations
+        if snp_call[0] == '0/0': 
+            called_base = ref
+        if snp_call[0] == '1/1':
+            called_base = alt
+        if snp_call[0] == '0/1':
+            called_base = 'N' # this could be changed to account for ambiguous bases 
+        
+        return called_base
+    
+    blanks =  np.zeros(numb_of_seqs, np.string0)
+    
+    if current_base.FILTER == 'LowQual':
+        blanks.fill("-")
+    
+    if current_base.FORMAT == 'GT':
+        blanks.fill("-")
+    
+    for count, snp_call in enumerate(current_base[9:]):
+        base = process_snp_call(snp_call, current_base.REF, current_base.ALT)
+        blanks[count] = base
+        
+    return blanks
+
 
 def main():
     
     # SETUP ARGS
     args = get_args()
-    print args
     align_range = (args.start, args.stop)
     window_size = args.window_size
     chrm = args.chromosome
@@ -134,6 +174,7 @@ def main():
     line_count = 0
     
     # PARSE VCF FIlE
+    snp_count = 0
     for line in vcf:
     
         # SKIP HEADER
@@ -143,6 +184,8 @@ def main():
         # START PROCESSING ALIGNED BASES
         if line.startswith(chrm):
             current_base = position_data._make(line.strip().split("\t"))
+            if current_base.c511.split(":")[0] != "0/0" : snp_count += 1
+
             base_calls = callSNPs(current_base, numb_of_seqs) 
             #calcShannonsDiversity(base_calls)       
             alignment[window_count] = base_calls
@@ -151,14 +194,17 @@ def main():
         window_count += 1
         if line_count % window_size == 0:
             taxa = current_base._fields[9:]
-            print array2OnelinerAlignment(line_count, taxa, alignment.transpose())
+            #print array2OnelinerAlignment(line_count, taxa, alignment.transpose())
         
             # MAKE CLEAN ALIGNMENT
             alignment = np.zeros((window_size,numb_of_seqs), np.string0)
             window_count = 0
     
         line_count += 1
-    
+
+    print snp_count
+    print line_count
+    print snp_count/line_count
     vcf.close()
 
 if __name__ == '__main__':
