@@ -28,7 +28,6 @@ import argparse
 import itertools
 import numpy as np
 from collections import namedtuple
-
 def get_args():
     """Parse sys.argv"""
     parser = argparse.ArgumentParser()
@@ -68,17 +67,33 @@ def makeDataTuple(vcf):
 
 def array2OnelinerAlignment(info, taxa, bases):
     """Convert array of array of taxa and an array of bases to one-liner."""
+<<<<<<< HEAD
     oneliner = str(info) + ":"
+=======
+    oneliner = 'start'=str(position) + "|"
+>>>>>>> d7dec1a3e1ee21af6f92ae4dbcf64d0e2d09ca0f
     for count, seq in enumerate(bases):
         oneliner += taxa[count]+","+''.join(itertools.chain(bases[count])) + ","
     oneliner = oneliner[:-1] + ";"    
     return oneliner
 
+<<<<<<< HEAD
 def process_snp_call(snp_call, ref, alt):
     """Process VCF genotype fields.
         The current version is very basic and 
         doesn't directly take into account the
         quality of the call."""
+=======
+
+def callSNPs(current_base, numb_of_seqs):
+    """Call the SNPs. Duh!"""
+    
+    def process_snp_call(snp_call, ref, alt):
+        """Process VCF genotype fields.
+            The current version is very basic and 
+            doesn't directly take into account the
+            quality of the call."""
+>>>>>>> d7dec1a3e1ee21af6f92ae4dbcf64d0e2d09ca0f
         
     called_base = ""
     snp_call = snp_call.split(":")
@@ -108,6 +123,7 @@ def process_snp_call(snp_call, ref, alt):
                     
     return called_base
 
+<<<<<<< HEAD
 def callSNPs(current_base, numb_of_seqs):
     """Call the SNPs. Duh!"""
         
@@ -125,6 +141,12 @@ def callSNPs(current_base, numb_of_seqs):
         
     return blanks
 
+<<<<<<< HEAD
+=======
+
+=======
+>>>>>>> refs/heads/dev
+>>>>>>> d7dec1a3e1ee21af6f92ae4dbcf64d0e2d09ca0f
 def main():
     
     # SETUP ARGS
