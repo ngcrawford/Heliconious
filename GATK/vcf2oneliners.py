@@ -58,7 +58,7 @@ def makeDataTuple(vcf):
 
 def array2OnelinerAlignment(position, taxa, bases):
     """Convert array of array of taxa and an array of bases to one-liner."""
-    oneliner = str(position) + ":"
+    oneliner = 'start'=str(position) + "|"
     for count, seq in enumerate(bases):
         oneliner += taxa[count]+","+''.join(itertools.chain(bases[count])) + ","
     oneliner = oneliner[:-1] + ";"
@@ -68,7 +68,6 @@ def array2OnelinerAlignment(position, taxa, bases):
 def callSNPs(current_base, numb_of_seqs):
     """Call the SNPs. Duh!"""
     
-    
     def process_snp_call(snp_call, ref, alt):
         """Process VCF genotype fields.
             The current version is very basic and 
@@ -106,6 +105,7 @@ def callSNPs(current_base, numb_of_seqs):
         
     return blanks
 
+<<<<<<< HEAD
 def callSNPs(current_base, numb_of_seqs):
     """Call the SNPs. Duh!"""
     
@@ -148,6 +148,8 @@ def callSNPs(current_base, numb_of_seqs):
     return blanks
 
 
+=======
+>>>>>>> refs/heads/dev
 def main():
     
     # SETUP ARGS
