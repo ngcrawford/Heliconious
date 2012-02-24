@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-untitled.py
+vcf2oneliners.py
 
 Created by Nick Crawford on 2011-11-18.
 Copyright (c) 2011
@@ -67,33 +67,18 @@ def makeDataTuple(vcf):
 
 def array2OnelinerAlignment(info, taxa, bases):
     """Convert array of array of taxa and an array of bases to one-liner."""
-<<<<<<< HEAD
-    oneliner = str(info) + ":"
-=======
-    oneliner = 'start'=str(position) + "|"
->>>>>>> d7dec1a3e1ee21af6f92ae4dbcf64d0e2d09ca0f
+
+    oneliner = 'start=' + str(position) + "|"
     for count, seq in enumerate(bases):
         oneliner += taxa[count]+","+''.join(itertools.chain(bases[count])) + ","
     oneliner = oneliner[:-1] + ";"    
     return oneliner
 
-<<<<<<< HEAD
 def process_snp_call(snp_call, ref, alt):
     """Process VCF genotype fields.
         The current version is very basic and 
         doesn't directly take into account the
         quality of the call."""
-=======
-
-def callSNPs(current_base, numb_of_seqs):
-    """Call the SNPs. Duh!"""
-    
-    def process_snp_call(snp_call, ref, alt):
-        """Process VCF genotype fields.
-            The current version is very basic and 
-            doesn't directly take into account the
-            quality of the call."""
->>>>>>> d7dec1a3e1ee21af6f92ae4dbcf64d0e2d09ca0f
         
     called_base = ""
     snp_call = snp_call.split(":")
@@ -123,7 +108,7 @@ def callSNPs(current_base, numb_of_seqs):
                     
     return called_base
 
-<<<<<<< HEAD
+
 def callSNPs(current_base, numb_of_seqs):
     """Call the SNPs. Duh!"""
         
@@ -141,12 +126,7 @@ def callSNPs(current_base, numb_of_seqs):
         
     return blanks
 
-<<<<<<< HEAD
-=======
 
-=======
->>>>>>> refs/heads/dev
->>>>>>> d7dec1a3e1ee21af6f92ae4dbcf64d0e2d09ca0f
 def main():
     
     # SETUP ARGS
@@ -156,7 +136,7 @@ def main():
     chrm = args.chromosome
     vcf_file_path = args.input
     
-    # OPEN VCIF
+    # OPEN VCF
     vcf = open(vcf_file_path, 'rU')
 
     # SETUP NAMED TUPLE TO STORE INFO FROM A SINGLE BASE
@@ -174,7 +154,6 @@ def main():
     windows = range(0, chrm_data[chrm], window_size)
     current_data = []
 
-    
     # PARSE VCF FIlE
     snp_count = 0    
     for line in vcf:
