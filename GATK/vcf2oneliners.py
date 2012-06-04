@@ -73,19 +73,31 @@ def makeDataTuple(vcf):
 
 def array2OnelinerAlignment(info, taxa, bases):
     """Convert array of array of taxa and an array of bases to one-liner."""
+<<<<<<< HEAD
     oneliner = str(info) + ":"
+=======
+
+    oneliner = 'start=' + str(position) + "|"
+>>>>>>> dev
     for count, seq in enumerate(bases):
         oneliner += taxa[count]+","+''.join(itertools.chain(bases[count])) + ","
     oneliner = oneliner[:-1] + ";"
     return oneliner
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
 def process_snp_call(snp_call, ref, alt):
     """Process VCF genotype fields.
         The current version is very basic and
         doesn't directly take into account the
         quality of the call."""
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> dev
     called_base = ""
     snp_call = snp_call.split(":")
 
@@ -131,6 +143,7 @@ def callSNPs(current_base, numb_of_seqs):
 
     return blanks
 
+<<<<<<< HEAD
 def count_informative_sites(alignment_array):
     """Informative Sites must have two different SNPs"""
     informative_sites = 0
@@ -151,6 +164,20 @@ def get_subset_vcf(chrm, start, stop):
     cli_parts = shlex.split(cli)
     vcf = Popen(cli_parts, stdin=PIPE, stderr=PIPE, stdout=PIPE).communicate()[0]
     return vcf
+=======
+
+def main():
+    
+    # SETUP ARGS
+    args = get_args()
+    align_range = (args.start, args.stop)
+    window_size = args.window_size
+    chrm = args.chromosome
+    vcf_file_path = args.input
+    
+    # OPEN VCF
+    vcf = open(vcf_file_path, 'rU')
+>>>>>>> dev
 
 def generate_bootstraps(chrm, chrm_len, window_size, numb_of_reps):
 
