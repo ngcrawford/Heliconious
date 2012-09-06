@@ -231,14 +231,14 @@ class ProcessPhyloData(MRJob):
         # SETUP TEMP FILE
         if system == "OSX_setup" and os.path.exists('tmp/') != True:
             os.mkdir('tmp/')
-        temp_in = tempfile.NamedTemporaryFile(suffix='.out', dir='tmp/', delete=False)
+        temp_in = tempfile.NamedTemporaryFile(suffix='.out', dir='tmp/',) # delete=False)
         for line in phylip:
             temp_in.write(line)
         temp_in.seek(0)     # move pointer to beginning of file
         
         # SETUP CONSTRAINT TREE FILE
         if self.options.constraint_tree != 'False':
-            constraint_file = tempfile.NamedTemporaryFile(suffix='.tree', dir='tmp/', delete=False)
+            constraint_file = tempfile.NamedTemporaryFile(suffix='.tree', dir='tmp/', ) # delete=False)
             constraint_file.write(self.options.constraint_tree+'\n')
             constraint_file.seek(0)
         
