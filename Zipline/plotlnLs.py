@@ -14,8 +14,8 @@ def getlnLs(fin):
     return sorted_bp_lnLs
 
 
-unconstrained = "/Users/nick/Desktop/butterfly/32.butterflies.Yb_superscaffold.lnL.trees"
-constrained = "/Users/nick/Desktop/butterfly/32.butterflies.Yb_superscaffold.lnL.constraint.trees"
+unconstrained = "/Users/MullenLab/Desktop/Grad_Students/Nick/butterfly_practice/trees/32.butterflies.1000bootstraps.trimmed.10000bp.lnL.trees"
+constrained = "/Users/MullenLab/Desktop/Grad_Students/Nick/butterfly_practice/trees/32.butterflies.1000bootstraps.trimmed.10000bp.lnL.constraint.trees"
 unconstrained_lnLs = getlnLs(unconstrained)
 constrained_lnLs = getlnLs(constrained)
 

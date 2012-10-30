@@ -5,8 +5,8 @@ import random
 import subprocess
 
 
-def create_panda_chrms_to_scaffolds():
-	agp_chrms = open("Hmel1.1/Hmel1-1_hox_RAD_matepair_chromosomes.agp")
+def create_panda_chrms_to_scaffolds(agp):
+	agp_chrms = open(agp)
 	data = []
 	for count, line in enumerate(agp_chrms):
 		line = line.strip().split("#")[0].strip()
@@ -110,17 +110,17 @@ def run_Beagle(region, fin, species):
 	p = subprocess.Popen(beagle_cmd, stdout=subprocess.PIPE)
 
 
-Cydno = "beagle/split_on_species/Cydno.non-multiallelic-variants-only.filtered.gatk.renamed.beagle-input.gz"
-Melpo = "beagle/split_on_species/Melpo.non-multiallelic-variants-only.filtered.gatk.renamed.beagle-input.gz"
-Pachi = "beagle/split_on_species/Pachi.non-multiallelic-variants-only.filtered.gatk.renamed.beagle-input.gz"
+# Cydno = "beagle/split_on_species/Cydno.non-multiallelic-variants-only.filtered.gatk.renamed.beagle-input.gz"
+# Melpo = "beagle/split_on_species/Melpo.non-multiallelic-variants-only.filtered.gatk.renamed.beagle-input.gz"
+# Pachi = "beagle/split_on_species/Pachi.non-multiallelic-variants-only.filtered.gatk.renamed.beagle-input.gz"
 
-data = create_panda_chrms_to_scaffolds()
-choices = randomly_select_chrm_chunks(data)
-regions = get_regions(choices)
+# data = create_panda_chrms_to_scaffolds()
+# choices = randomly_select_chrm_chunks(data)
+# regions = get_regions(choices)
 
-[run_Beagle(region, Cydno, 'Cydno') for region in regions]
-[run_Beagle(region, Melpo, 'Melpo') for region in regions]
-[run_Beagle(region, Pachi, 'Pachi') for region in regions]
+# [run_Beagle(region, Cydno, 'Cydno') for region in regions]
+# [run_Beagle(region, Melpo, 'Melpo') for region in regions]
+# [run_Beagle(region, Pachi, 'Pachi') for region in regions]
 
 
 
